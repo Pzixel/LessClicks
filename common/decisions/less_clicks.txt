@@ -4,7 +4,6 @@
 	}
 
 	possible = {
-		this = yes
 	}
 	
 	when_taken = {
