@@ -1,23 +1,9 @@
-namespace = build_railroads_events
+﻿namespace = build_railroads_events
 
 build_railroads_events.1 = {
     type = country_event
-	hidden = yes
-
-	trigger = {
-        always = yes
-    }
 
     immediate = {
-        every_scope_state = {
-            if = {
-                limit = {
-                    always = yes # state_infrastructure_balance < 0
-                }
-                add_loyalists = {
-                    value = 7777
-                }               
-            }
-        }
+        add_treasury = 100 
     }
 }
