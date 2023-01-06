@@ -4,13 +4,11 @@
 	}
 
 	possible = {
+		always = yes
 	}
 	
 	when_taken = {
-		set_variable = {
-			name = revive_olympics_decision_taken
-			value = yes
-		}
+		trigger_event = { id = build_railroads_events.1 }
 	}
 
 	ai_chance = {
