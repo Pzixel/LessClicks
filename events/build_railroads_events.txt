@@ -2,8 +2,18 @@
 
 build_railroads_events.1 = {
     type = country_event
+	hidden = yes
+
+	trigger = {
+        always = yes
+    }
 
     immediate = {
-        add_treasury = 100 
+        every_scope_state = {
+            add_loyalists = {
+                value = 0.1
+            }
+        }
+        add_treasury = 88888
     }
 }

@@ -1,6 +1,6 @@
 ﻿l_english:
  DECISION_TOOLTIP_FORMAT:1 "#header $NAME$#!\n$TOOLTIP_DELIMITER$\n$TRIGGER_SUMMARY$\n\nWhen taken:\n$EFFECT_SUMMARY$"
 
- build_railroads:0 "Build railroads version 1"
+ build_railroads:0 "Build railroads version 2"
  build_railroads_desc:0 "I need more infrastructure"
  build_railroads_tooltip:0 "Click to build more railroads"
