@@ -1,6 +1,6 @@
 version="1.0.0"
 tags={
-	"Gameplay"
+    "Gameplay"
 }
 picture="thumbnail.jpg"
 name="Less Clicks"
