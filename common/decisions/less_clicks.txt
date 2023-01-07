@@ -4,7 +4,7 @@
 	}
 
 	possible = {
-		always = yes
+		has_technology_researched = railways
 	}
 	
 	when_taken = {
