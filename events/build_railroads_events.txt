@@ -9,13 +9,90 @@ build_railroads_events.1 = {
     }
 
     immediate = {
-        every_scope_state = {
-			create_building={
-				building="building_railway"
-				level=5
-				reserves=1
+		random_state = {
+			limit = {
+				owner = ROOT
 			}
+			save_scope_as = cur_state
+		}
+
+        scope:cur_state = {
+            set_variable = {
+                name = missing_railways
+                value = {
+                    add = {
+                        value = state_infrastructure_balance
+                        divide = 15
+                    }
+                }
+            }
+
+            if = {
+                limit = {
+                    var:missing_railways > 0
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 1
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 2
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 3
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 4
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 5
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 6
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 7
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 8
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 9
+                }
+                start_building_construction = building_railway
+            }
+            if = {
+                limit = {
+                    var:missing_railways > 10
+                }
+                start_building_construction = building_railway
+            }
         }
-        add_treasury = 88888
     }
 }
