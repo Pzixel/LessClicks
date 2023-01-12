@@ -15,3 +15,21 @@
         base = 0
     }
 }
+
+build_administrations = {
+    is_shown = {
+        exists = yes
+    }
+
+    possible = {
+        always = yes
+    }
+    
+    when_taken = {
+        trigger_event = { id = build_administrations_events.1 }
+    }
+
+    ai_chance = {
+        base = 0
+    }
+}
