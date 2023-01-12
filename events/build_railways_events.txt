@@ -9,119 +9,12 @@ build_railways_events.1 = {
     }
 
     immediate = {
-        random_scope_state = {
-            limit = {
-                is_capital = yes
-            }
-            set_variable = {
-                name = default_infra_per_railroad
-                value = {
-                    if = {
-                        limit = {
-                            is_production_method_active = {
-                                building_type = building_railway
-                                production_method = pm_no_passenger_trains
-                            }
-                        }
-                        value = 20
-                    }                    
-                    else = {
-                        value = 15
-                    }
-                    if = {
-                        limit = {
-                            is_production_method_active = {
-                                building_type = building_railway
-                                production_method = pm_electric_trains
-                            }        
-                        }
-                        add = 10
-                    }    
-                    if = {
-                        limit = {
-                            is_production_method_active = {
-                                building_type = building_railway
-                                production_method = pm_diesel_trains
-                            }        
-                        }
-                        add = 20
-                    }    
-                }
-            }
-
-            set_variable = {
-                name = default_pm_passengers
-                value = {
-                    if = {
-                        limit = {
-                            is_production_method_active = {
-                                building_type = building_railway
-                                production_method = pm_wooden_passenger_carriages
-                            }
-                        }
-                        value = 3
-                    } else_if = {
-                        limit = {
-                            is_production_method_active = {
-                                building_type = building_railway
-                                production_method = pm_steel_passenger_carriages
-                            }
-                        }
-                        value = 2
-                    } else = {
-                        value = 1
-                    }
-                }
-            }
-
-            set_variable = {
-                name = default_pm_trains
-                value = {
-                    if = {
-                        limit = {
-                            is_production_method_active = {
-                                building_type = building_railway
-                                production_method = pm_diesel_trains
-                            }
-                        }
-                        value = 3
-                    } else_if = {
-                        limit = {
-                            is_production_method_active = {
-                                building_type = building_railway
-                                production_method = pm_electric_trains
-                            }
-                        }
-                        value = 2
-                    } else = {
-                        value = 1
-                    }
-                }
-            }
-
-            debug_log = "HHHHHESSSS3"
-            
-            if = {
-                limit = {
-                    var:default_pm_passengers = 1
-                }
-                debug_log = "NO_PASS"
-            } else = {
-                debug_log = "PASS"
-            }
-
-            save_scope_as = capital_scope
-        }
-
-
         every_scope_state = {
             if = {
                 limit = {
                     state_infrastructure_balance < 0
                 }
 
-                debug_log = "HHJHJHJHJ"
-                
                 if = {
                     limit = {
                         NOT = {
@@ -130,10 +23,24 @@ build_railways_events.1 = {
                             }
                         }
                     }
-
+                    create_building = {
+                        building = building_railway
+                        level = 1
+                    }
+                    set_variable = must_destroy_building
+                } 
+                else = {
                     set_variable = {
-                        name = change_pm
+                        name = must_destroy_building
                         value = no
+                    }
+                }
+                
+                if = {
+                    limit = {
+                        any_scope_building = {
+                            is_building_type = building_railway
+                        }
                     }
                     
                     set_variable = {
@@ -171,16 +78,13 @@ build_railways_events.1 = {
                             }    
                         }
                     }
-                } else = {
-                    debug_log = "Using default"
+                }
 
-                    set_variable = {
-                        name = infra_per_railroad
-                        value = scope:capital_scope.var:default_infra_per_railroad
+                if = {
+                    limit = {
+                        var:must_destroy_building = yes
                     }
-
-                    
-                    set_variable = change_pm
+                    remove_building = building_railway
                 }
                 
                 set_variable = {
@@ -201,445 +105,10 @@ build_railways_events.1 = {
                         var:missing_railways > 0
                     }
 
-                    debug_log_scopes = yes
-
-                    if = {
-                        limit = {
-                            always = yes 
-                        }
-                        
-                        set_variable = {
-                            name = debug_value
-                            value = state_infrastructure_balance
-                        }
-                    
-                        debug_log = "state_infrastructure_balance DEBUG"
-                    
-                        if = {
-                            limit = {
-                                var:debug_value < 0
-                            }
-                            debug_log = "-"
-                            set_variable = {
-                                name = debug_value
-                                value = {
-                                    add = {
-                                        value = var:debug_value
-                                        multiply = -1
-                                    }
-                                }
-                            }
-                        }
-                    
-                        if = {
-                            limit = {
-                                var:debug_value >= 900
-                            }
-                            debug_log = "9"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 800
-                            }
-                            debug_log = "8"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 700
-                            }
-                            debug_log = "7"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 600
-                            }
-                            debug_log = "6"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 500
-                            }
-                            debug_log = "5"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 400
-                            }
-                            debug_log = "4"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 300
-                            }
-                            debug_log = "3"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 200
-                            }
-                            debug_log = "2"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 100
-                            }
-                            debug_log = "1"
-                        }
-                    
-                        set_variable = {
-                            name = debug_value
-                            value = {
-                                add = {
-                                    value = var:debug_value
-                                    modulo = 100
-                                }
-                            }
-                        }
-                        
-                        if = {
-                            limit = {
-                                var:debug_value >= 90
-                            }
-                            debug_log = "9"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 80
-                            }
-                            debug_log = "8"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 70
-                            }
-                            debug_log = "7"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 60
-                            }
-                            debug_log = "6"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 50
-                            }
-                            debug_log = "5"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 40
-                            }
-                            debug_log = "4"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 30
-                            }
-                            debug_log = "3"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 20
-                            }
-                            debug_log = "2"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 10
-                            }
-                            debug_log = "1"
-                        }
-                        
-                        set_variable = {
-                            name = debug_value
-                            value = {
-                                add = {
-                                    value = var:debug_value
-                                    modulo = 10
-                                }
-                            }
-                        }
-                        
-                        if = {
-                            limit = {
-                                var:debug_value >= 9
-                            }
-                            debug_log = "9"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 8
-                            }
-                            debug_log = "8"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 7
-                            }
-                            debug_log = "7"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 6
-                            }
-                            debug_log = "6"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 5
-                            }
-                            debug_log = "5"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 4
-                            }
-                            debug_log = "4"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 3
-                            }
-                            debug_log = "3"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 2
-                            }
-                            debug_log = "2"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 1
-                            }
-                            debug_log = "1"
-                        } else = {
-                            debug_log = "0"
-                        }
-                    }
-
-
-                    if = {
-                        limit = {
-                            always = yes 
-                        }
-                        
-                        set_variable = {
-                            name = debug_value
-                            value = var:infra_per_railroad
-                        }
-                    
-                        debug_log = "infra_per_railroad DEBUG"
-                    
-                        if = {
-                            limit = {
-                                var:debug_value < 0
-                            }
-                            debug_log = "-"
-                            set_variable = {
-                                name = debug_value
-                                value = {
-                                    add = {
-                                        value = var:debug_value
-                                        multiply = -1
-                                    }
-                                }
-                            }
-                        }
-                    
-                        if = {
-                            limit = {
-                                var:debug_value >= 900
-                            }
-                            debug_log = "9"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 800
-                            }
-                            debug_log = "8"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 700
-                            }
-                            debug_log = "7"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 600
-                            }
-                            debug_log = "6"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 500
-                            }
-                            debug_log = "5"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 400
-                            }
-                            debug_log = "4"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 300
-                            }
-                            debug_log = "3"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 200
-                            }
-                            debug_log = "2"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 100
-                            }
-                            debug_log = "1"
-                        }
-                    
-                        set_variable = {
-                            name = debug_value
-                            value = {
-                                add = {
-                                    value = var:debug_value
-                                    modulo = 100
-                                }
-                            }
-                        }
-                        
-                        if = {
-                            limit = {
-                                var:debug_value >= 90
-                            }
-                            debug_log = "9"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 80
-                            }
-                            debug_log = "8"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 70
-                            }
-                            debug_log = "7"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 60
-                            }
-                            debug_log = "6"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 50
-                            }
-                            debug_log = "5"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 40
-                            }
-                            debug_log = "4"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 30
-                            }
-                            debug_log = "3"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 20
-                            }
-                            debug_log = "2"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 10
-                            }
-                            debug_log = "1"
-                        }
-                        
-                        set_variable = {
-                            name = debug_value
-                            value = {
-                                add = {
-                                    value = var:debug_value
-                                    modulo = 10
-                                }
-                            }
-                        }
-                        
-                        if = {
-                            limit = {
-                                var:debug_value >= 9
-                            }
-                            debug_log = "9"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 8
-                            }
-                            debug_log = "8"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 7
-                            }
-                            debug_log = "7"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 6
-                            }
-                            debug_log = "6"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 5
-                            }
-                            debug_log = "5"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 4
-                            }
-                            debug_log = "4"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 3
-                            }
-                            debug_log = "3"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 2
-                            }
-                            debug_log = "2"
-                        }
-                        else_if = {
-                            limit = {
-                                var:debug_value >= 1
-                            }
-                            debug_log = "1"
-                        } else = {
-                            debug_log = "0"
-                        }
-                    }
-
                     while = {
                         count = var:missing_railways
                         start_building_construction = building_railway
-                    } 
+                    }
                 }
             }
         }
