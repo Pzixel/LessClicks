@@ -52,6 +52,8 @@ build_railways_events.1 = {
                     add = {
                         value = state_infrastructure_balance
                         multiply = -1
+                        add = var:infra_per_railroad
+                        subtract = 0.5 # add infra_per_railroad - 0.5 to ensure ceiling at divison
                         divide = var:infra_per_railroad
                     }
                 }
