@@ -18,7 +18,9 @@
 
 build_administrations = {
     is_shown = {
-        exists = yes
+		NOT = {
+            this = c:CHI
+        }
     }
 
     possible = {
