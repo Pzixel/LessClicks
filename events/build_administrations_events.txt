@@ -51,7 +51,7 @@ build_administrations_events.1 = {
                         level = 1
                     }
                     set_variable = must_destroy_building
-                } 
+                }
                 else = {
                     set_variable = {
                         name = must_destroy_building
@@ -70,7 +70,7 @@ build_administrations_events.1 = {
                                 }
                             }
                             value = 5
-                        } 
+                        }
                         else_if = {
                             limit = {
                                 is_production_method_active = {
@@ -79,7 +79,7 @@ build_administrations_events.1 = {
                                 }
                             }
                             value = 10
-                        } 
+                        }
                         else_if = {
                             limit = {
                                 is_production_method_active = {
@@ -88,10 +88,10 @@ build_administrations_events.1 = {
                                 }
                             }
                             value = 15
-                        } 
+                        }
                         else = {
                             value = 30
-                        } 
+                        }
                     }
                 }
 
@@ -119,7 +119,7 @@ build_administrations_events.1 = {
                     limit = {
                         var:missing_buildings > 0
                     }
-                    
+
                     if = {
                         limit = {
                             prev.var:has_law_appointed_bureaucrats = yes
@@ -136,7 +136,7 @@ build_administrations_events.1 = {
                     while = {
                         count = var:missing_buildings
                         start_building_construction = building_government_administration
-                    } 
+                    }
                 }
             }
         }
