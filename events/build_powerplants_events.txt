@@ -17,45 +17,7 @@ build_powerplants_events.1 = {
 
                 set_variable = {
                     name = electicity_balance_left
-                    value = -1000000
-                }
-
-                set_variable = {
-                    name = electicity_balance_right
-                    value = 0
-                }
-
-                # use binary search to find the amount at which state_goods_delta is 0
-
-                while = {
-                    count = 21 # log2(1000000) + 1
-
-                    set_variable = {
-                        name = electicity_balance_mid
-                        value = {
-                            add = {
-                                value = var:electicity_balance_left
-                                add = var:electicity_balance_right
-                                divide = 2
-                            }
-                        }
-                    }
-
-                    if = {
-                        limit = {
-                            sg:electricity = { state_goods_delta > prev.var:electicity_balance_mid }
-                        }
-                        set_variable = {
-                            name = electicity_balance_left
-                            value = var:electicity_balance_mid
-                        }
-                    }
-                    else = {
-                        set_variable = {
-                            name = electicity_balance_right
-                            value = var:electicity_balance_mid
-                        }
-                    }
+                    value = sg:electricity.state_goods_delta
                 }
 
                 if = {
