@@ -13,10 +13,21 @@ build_powerplants_events.1 = {
             if = {
                 limit = {
                     sg:electricity = { state_goods_delta < 0 }
+                    or = {
+                        any_scope_building = {
+                            is_building_type = building_power_plant
+                            occupancy > 0.75
+                        }
+                        not = {
+                            any_scope_building = {
+                                is_building_type = building_power_plant
+                            }
+                        }
+                    }
                 }
 
                 set_variable = {
-                    name = electicity_balance_left
+                    name = electricity_balance_left
                     value = sg:electricity.state_goods_delta
                 }
 
@@ -89,7 +100,7 @@ build_powerplants_events.1 = {
                     name = missing_power_plants
                     value = {
                         add = {
-                            value = var:electicity_balance_left
+                            value = var:electricity_balance_left
                             multiply = -1
                             add = var:electricity_per_plant
                             subtract = 0.5 # add electricity_per_plant - 0.5 to ensure ceiling at divison
